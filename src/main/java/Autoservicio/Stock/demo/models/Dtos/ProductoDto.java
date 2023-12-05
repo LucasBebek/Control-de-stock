@@ -1,5 +1,6 @@
 package Autoservicio.Stock.demo.models.Dtos;
 
+import Autoservicio.Stock.demo.models.entity.Categoria;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,5 +17,5 @@ public class ProductoDto {
     private Long stock;
     private Double precio;
     private Double precio_unitario;
-    
+    private Categoria categoria_id;
 }

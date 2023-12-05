@@ -32,4 +32,8 @@ public class Categoria{
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     private List<Producto> productos;
+
+    public Categoria(int categoriaId) {
+        this.id = (long) categoriaId;
+    }
 }
