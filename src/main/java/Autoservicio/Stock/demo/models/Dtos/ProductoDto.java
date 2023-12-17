@@ -17,5 +17,5 @@ public class ProductoDto {
     private Long stock;
     private Double precio;
     private Double precio_unitario;
-    private Categoria categoria_id;
+    private String categoria_name;
 }

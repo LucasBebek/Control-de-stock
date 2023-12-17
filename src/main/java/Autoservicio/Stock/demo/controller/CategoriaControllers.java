@@ -1,5 +1,5 @@
 package Autoservicio.Stock.demo.controller;
-
+ 
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -10,39 +10,36 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import Autoservicio.Stock.demo.models.Dtos.ProductoRequest;
-import Autoservicio.Stock.demo.models.Dtos.ProductoDto;
-import Autoservicio.Stock.demo.models.entity.Producto;
-
-import Autoservicio.Stock.demo.services.ProductoService;
+import Autoservicio.Stock.demo.models.Dtos.CategoriaDto;
+import Autoservicio.Stock.demo.models.Dtos.CategoriaRequest;
+import Autoservicio.Stock.demo.services.CategoriaService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/producto")
+@RequestMapping("/categoria")
 @CrossOrigin(origins = "http://localhost:4200")
-public class ProductoControllers {
+public class CategoriaControllers {
     
-    private final ProductoService productoService;
+    private final CategoriaService categoriaService;
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addProducto(@RequestBody ProductoRequest productoRequest){
-        this.productoService.addProducto(productoRequest);
+    public void addProducto(@RequestBody CategoriaRequest categoriaRequest){
+        this.categoriaService.addCategoria(categoriaRequest);
     }
-
+    
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ProductoDto>> getAllProductos(){
-        return ResponseEntity.ok(productoService.getAllProductos());
+    public ResponseEntity<List<CategoriaDto>> getAllCategorias(){
+        return ResponseEntity.ok(categoriaService.getAllCategorias());
     }
 
-    @GetMapping("/find/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ProductoDto> findProductoById(@PathVariable Long id){
-        return ResponseEntity.ok(productoService.findProductoById(id));
-    }
+    // @GetMapping("/find/{id}")
+    // @ResponseStatus(HttpStatus.OK)
+    // public ResponseEntity<CategoriaDto> findCategoriaById(@PathVariable Long id){
+    //     return ResponseEntity.ok(categoriaService.findCategoriaById(id));
+    // }
 }

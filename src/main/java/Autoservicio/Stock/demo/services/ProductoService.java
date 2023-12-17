@@ -1,8 +1,9 @@
 package Autoservicio.Stock.demo.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 import Autoservicio.Stock.demo.models.Dtos.ProductoDto;
@@ -31,23 +32,35 @@ public class ProductoService {
     }
 
     public List<ProductoDto> getAllProductos(){
-        List<Producto> producto = productoRepo.findAll();
-        return producto.stream().map(this::mapToProductoDto).toList();
+        List<Producto> productos = productoRepo.findAll();
+        List<ProductoDto> listProductos = new ArrayList<>();
+
+        for(Producto producto : productos){
+          ProductoDto productoDto = new ProductoDto();
+          productoDto.setId(producto.getId());
+          productoDto.setNombre(producto.getNombre());
+          productoDto.setPrecio(producto.getPrecio());
+          productoDto.setPrecio_unitario(producto.getPrecio_unitario());
+          productoDto.setStock(producto.getStock());
+          productoDto.setCategoria_name(producto.getCategoria().getNombre_categoria());
+
+          listProductos.add(productoDto);
+        }
+        return listProductos;
     } 
     
-    public ResponseEntity <Producto> findProductoById(Long id){
-        Producto producto = productoRepo.findById(id).get();
-        return ResponseEntity.ok(producto);
-    }
-     
-    private ProductoDto mapToProductoDto(Producto producto){
+    public ProductoDto findProductoById(Long id){
+        Producto producto = productoRepo.findById(id).orElseThrow();
+        
         return ProductoDto.builder()
         .id(producto.getId())
         .nombre(producto.getNombre())
-        .stock(producto.getStock())
         .precio(producto.getPrecio())
         .precio_unitario(producto.getPrecio_unitario())
-        .categoria_id(producto.getCategoria())
+        .stock(producto.getStock())
+        .categoria_name(producto.getCategoria().getNombre_categoria())//getNombre_Categoria recupera el nombre de la categoria asociada al producto, no el id
         .build();
     }
+     
+ 
 }
