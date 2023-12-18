@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +22,8 @@ import Autoservicio.Stock.demo.models.entity.Producto;
 
 import Autoservicio.Stock.demo.services.ProductoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -45,4 +49,17 @@ public class ProductoControllers {
     public ResponseEntity<ProductoDto> findProductoById(@PathVariable Long id){
         return ResponseEntity.ok(productoService.findProductoById(id));
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteProducto(@PathVariable Long id){
+        
+        return ResponseEntity.ok(productoService.deleteProducto(id));
+    }
+
+    @PutMapping("/edit/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ProductoDto> editProducto(@PathVariable Long id, @RequestBody ProductoDto productoDto) {
+       return ResponseEntity.ok(productoService.editProducto(id, productoDto));
+    }
+     
 }

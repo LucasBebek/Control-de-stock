@@ -2,10 +2,13 @@ package Autoservicio.Stock.demo.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 
 
 import org.springframework.stereotype.Service;
 
+import Autoservicio.Stock.demo.exceptions.exceptions;
 import Autoservicio.Stock.demo.models.Dtos.ProductoDto;
 import Autoservicio.Stock.demo.models.Dtos.ProductoRequest;
 import Autoservicio.Stock.demo.models.entity.Producto;
@@ -62,5 +65,35 @@ public class ProductoService {
         .build();
     }
      
- 
+    public String deleteProducto(Long id){
+       Producto producto = productoRepo.findById(id).orElseThrow();
+
+       productoRepo.deleteById(id);
+
+       return "producto: " + producto.getNombre() + " eliminado";
+    }
+
+   public ProductoDto editProducto(Long id, ProductoDto productoDto){
+    Producto producto = productoRepo.findById(id)
+    .orElseThrow(()-> new exceptions("producto con id: " + id + " no encontrado"));
+   
+    producto.setNombre(productoDto.getNombre());
+    producto.setPrecio(productoDto.getPrecio());
+    producto.setPrecio_unitario(productoDto.getPrecio_unitario());
+    producto.setStock(productoDto.getStock());
+    producto.getCategoria().setNombre_categoria(productoDto.getCategoria_name());
+    
+    productoRepo.save(producto);
+
+    return ProductoDto.builder()
+        .id(producto.getId())
+        .nombre(producto.getNombre())
+        .precio(producto.getPrecio())
+        .precio_unitario(producto.getPrecio_unitario())
+        .stock(producto.getStock())
+        .categoria_name(producto.getCategoria().getNombre_categoria())
+        .build();
+}
+
+   
 }
