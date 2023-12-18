@@ -1,6 +1,5 @@
 package Autoservicio.Stock.demo.models.Dtos;
 
-import Autoservicio.Stock.demo.models.entity.Categoria;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
