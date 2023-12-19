@@ -34,10 +34,6 @@ public class Producto{
     @Column(length = 255, nullable = false)
     private Double precio;
     
-    @Column(length = 255, nullable = false)
-    private Double precio_unitario;
-    
-    
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;

@@ -24,7 +24,6 @@ public class ProductoService {
         .nombre(productoRequest.getNombre())
         .stock(productoRequest.getStock())
         .precio(productoRequest.getPrecio())
-        .precio_unitario(productoRequest.getPrecio_unitario())
         .categoria(productoRequest.getCategoria_id())
         .build();
     productoRepo.save(producto);
@@ -40,7 +39,6 @@ public class ProductoService {
           productoDto.setId(producto.getId());
           productoDto.setNombre(producto.getNombre());
           productoDto.setPrecio(producto.getPrecio());
-          productoDto.setPrecio_unitario(producto.getPrecio_unitario());
           productoDto.setStock(producto.getStock());
           productoDto.setCategoria_name(producto.getCategoria().getNombre_categoria());
 
@@ -56,7 +54,6 @@ public class ProductoService {
         .id(producto.getId())
         .nombre(producto.getNombre())
         .precio(producto.getPrecio())
-        .precio_unitario(producto.getPrecio_unitario())
         .stock(producto.getStock())
         .categoria_name(producto.getCategoria().getNombre_categoria())//getNombre_Categoria recupera el nombre de la categoria asociada al producto, no el id
         .build();
@@ -76,7 +73,6 @@ public class ProductoService {
    
     producto.setNombre(productoDto.getNombre());
     producto.setPrecio(productoDto.getPrecio());
-    producto.setPrecio_unitario(productoDto.getPrecio_unitario());
     producto.setStock(productoDto.getStock());
     producto.getCategoria().setNombre_categoria(productoDto.getCategoria_name());
     
@@ -86,7 +82,6 @@ public class ProductoService {
         .id(producto.getId())
         .nombre(producto.getNombre())
         .precio(producto.getPrecio())
-        .precio_unitario(producto.getPrecio_unitario())
         .stock(producto.getStock())
         .categoria_name(producto.getCategoria().getNombre_categoria())
         .build();

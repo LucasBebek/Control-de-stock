@@ -15,6 +15,5 @@ public class ProductoDto {
     private String nombre;
     private Long stock;
     private Double precio;
-    private Double precio_unitario;
     private String categoria_name;
 }

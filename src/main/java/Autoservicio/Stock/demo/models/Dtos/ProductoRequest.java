@@ -15,6 +15,5 @@ public class ProductoRequest {
     private String nombre;
     private Long stock;
     private Double precio;
-    private Double precio_unitario;
     private Categoria categoria_id;
 }
