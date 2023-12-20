@@ -73,4 +73,8 @@ public class CategoriaService {
        .nombre_categoria(categoria.getNombre_categoria())
        .build();
 }
+// public boolean verificarNombreExistente(String nombreCategoria) {
+//   // Lógica para verificar si el nombre ya existe en la base de datos
+//   return categoriaRepo.existsByNombre_Categoria(nombreCategoria);
+// }
 }

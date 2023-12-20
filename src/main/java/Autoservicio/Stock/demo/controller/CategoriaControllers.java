@@ -2,6 +2,7 @@ package Autoservicio.Stock.demo.controller;
  
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,7 +27,9 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "http://localhost:4200")
 public class CategoriaControllers {
     
+    @Autowired
     private final CategoriaService categoriaService;
+    
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void addCategoria(@RequestBody CategoriaRequest categoriaRequest){
@@ -56,5 +59,11 @@ public class CategoriaControllers {
     public ResponseEntity<CategoriaDto> editCategoria(@PathVariable Long id, @RequestBody CategoriaDto categoriaDto) {
        return ResponseEntity.ok(categoriaService.editCategoria(id, categoriaDto));
     }
+    // @GetMapping("/verificarNombre/{nombre_categoria}")
+    // public ResponseEntity<Boolean> verificarNombreExistente(@PathVariable String nombre_categoria) {
+    //     // Lógica para verificar si el nombre ya existe en la base de datos
+    //     boolean nombreExistente = categoriaService.verificarNombreExistente(nombre_categoria);
+    //     return ResponseEntity.ok(nombreExistente);
+    // }
     
 }
