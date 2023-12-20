@@ -2,6 +2,7 @@ package Autoservicio.Stock.demo.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,7 +32,9 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "http://localhost:4200")
 public class ProductoControllers {
     
+    @Autowired
     private final ProductoService productoService;
+    
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void addProducto(@RequestBody ProductoRequest productoRequest){
@@ -60,6 +63,13 @@ public class ProductoControllers {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProductoDto> editProducto(@PathVariable Long id, @RequestBody ProductoDto productoDto) {
        return ResponseEntity.ok(productoService.editProducto(id, productoDto));
+    }
+    
+    @GetMapping("/verificarNombre/{nombre}")
+    public ResponseEntity<Boolean> verificarNombreExistente(@PathVariable String nombre) {
+        // Lógica para verificar si el nombre ya existe en la base de datos
+        boolean nombreExistente = productoService.verificarNombreExistente(nombre);
+        return ResponseEntity.ok(nombreExistente);
     }
      
 }

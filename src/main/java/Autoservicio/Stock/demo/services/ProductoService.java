@@ -40,7 +40,7 @@ public class ProductoService {
           productoDto.setNombre(producto.getNombre());
           productoDto.setPrecio(producto.getPrecio());
           productoDto.setStock(producto.getStock());
-          productoDto.setCategoria_name(producto.getCategoria().getNombre_categoria());
+          productoDto.setCategoria_id(producto.getCategoria().getNombre_categoria());
 
           listProductos.add(productoDto);
         }
@@ -55,7 +55,7 @@ public class ProductoService {
         .nombre(producto.getNombre())
         .precio(producto.getPrecio())
         .stock(producto.getStock())
-        .categoria_name(producto.getCategoria().getNombre_categoria())//getNombre_Categoria recupera el nombre de la categoria asociada al producto, no el id
+        .categoria_id(producto.getCategoria().getNombre_categoria())//getNombre_Categoria recupera el nombre de la categoria asociada al producto, no el id
         .build();
     }
      
@@ -74,7 +74,7 @@ public class ProductoService {
     producto.setNombre(productoDto.getNombre());
     producto.setPrecio(productoDto.getPrecio());
     producto.setStock(productoDto.getStock());
-    producto.getCategoria().setNombre_categoria(productoDto.getCategoria_name());
+    producto.getCategoria().setNombre_categoria(productoDto.getCategoria_id());
     
     productoRepo.save(producto);
 
@@ -83,9 +83,12 @@ public class ProductoService {
         .nombre(producto.getNombre())
         .precio(producto.getPrecio())
         .stock(producto.getStock())
-        .categoria_name(producto.getCategoria().getNombre_categoria())
+        .categoria_id(producto.getCategoria().getNombre_categoria())
         .build();
 }
-
+    public boolean verificarNombreExistente(String nombre) {
+        // Lógica para verificar si el nombre ya existe en la base de datos
+        return productoRepo.existsByNombre(nombre);
+}
    
 }

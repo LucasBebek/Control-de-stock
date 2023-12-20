@@ -15,5 +15,5 @@ public class ProductoDto {
     private String nombre;
     private Long stock;
     private Double precio;
-    private String categoria_name;
+    private String categoria_id;
 }
